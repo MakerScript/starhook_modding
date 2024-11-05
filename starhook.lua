@@ -4857,28 +4857,6 @@ do
 
 
 	--// gun tp
-
-	if (not table.find(dahood_ids, game.PlaceId)) then
-		utility.new_connection(workspace.Players.Jpanishere.ChildAdded, function(object)
-			if object:IsA("Tool") and object.Name == "[Revolver]" then
-				local gun = object
-	
-				local connection = utility.new_connection(run_service.Heartbeat, function()
-					if (locals.target_aim.is_targetting and locals.target_aim.target) then
-						local target = locals.target_aim.target
-						if utility.has_character(target) then
-							local targetGripPosition = target.Character.HumanoidRootPart.CFrame
-							gun.Grip = targetGripPosition - target.Character.HumanoidRootPart.Position
-						end
-					end
-				end)
-	
-				utility.new_connection(gun.Destroying, function()
-					connection:Disconnect()
-				end)
-			end
-		end)
-	end
 	
 
     --// gun connections
