@@ -4669,6 +4669,9 @@ do
 		end;
 
 		--// anti aim
+
+		local antiLockEnabledPREM = false
+
 		do
 			--// velocity spoofer
 			utility.new_connection(run_service.Heartbeat, function()
@@ -4676,6 +4679,12 @@ do
 				local keybind = flags["anti_aim_velocity_spoofer_keybind"];
 
 				if (enabled and keybind and utility.has_character(local_player)) then
+
+					if not antiLockEnabledPREM then
+						library:Notification("Anti Lock [ON]", 2)
+						antiLockEnabledPREM = true
+					end
+
 					local type = flags["anti_aim_velocity_spoofer_type"];
 
 					local hrp = local_player.Character.HumanoidRootPart
@@ -4693,20 +4702,24 @@ do
 						local y = flags["anti_aim_velocity_spoofer_static_y"];
 						local z = flags["anti_aim_velocity_spoofer_static_z"];
 						
-						library:Notification("Anti Lock [ON]", 2)
 						new_velocity = Vector3.new(x, y, z);
 					elseif (type == "Random") then
 						local randomization = flags["anti_aim_velocity_spoofer_randomization"];
 
 						new_velocity = custom_math.random_vector3(randomization * 1000); 
 					end;
-
+					
+					if antiLockEnabled then
+						library:Notification("Anti Lock [OFF]", 2)
+						antiLockEnabled = false
+					end
 					hrp.Velocity = new_velocity;
 					run_service.RenderStepped:Wait();
-					library:Notification("Anti Lock [OFF]", 2)
 					hrp.Velocity = old_velocity;
 				end;
 			end);
+
+
 
 			--// network desync
 			utility.new_connection(run_service.Heartbeat, function()
