@@ -4682,7 +4682,7 @@ do
 					local old_velocity = hrp.Velocity;
 					
 					local new_velocity;
-
+					library:Notification("Anti Lock [ON]", 2)
 					if (type == "Local Strafe") then
 						local strafe_speed = flags["anti_aim_velocity_spoofer_strafe_speed"];
 						local strafe_distance = flags["anti_aim_velocity_spoofer_strafe_distance"] * 10;
@@ -4703,6 +4703,7 @@ do
 
 					hrp.Velocity = new_velocity;
 					run_service.RenderStepped:Wait();
+					library:Notification("Anti Lock [OFF]", 2)
 					hrp.Velocity = old_velocity;
 				end;
 			end);
