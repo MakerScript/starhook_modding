@@ -4682,7 +4682,6 @@ do
 					local old_velocity = hrp.Velocity;
 					
 					local new_velocity;
-					library:Notification("Anti Lock [ON]", 2)
 					if (type == "Local Strafe") then
 						local strafe_speed = flags["anti_aim_velocity_spoofer_strafe_speed"];
 						local strafe_distance = flags["anti_aim_velocity_spoofer_strafe_distance"] * 10;
@@ -4694,6 +4693,7 @@ do
 						local y = flags["anti_aim_velocity_spoofer_static_y"];
 						local z = flags["anti_aim_velocity_spoofer_static_z"];
 						
+						library:Notification("Anti Lock [ON]", 2)
 						new_velocity = Vector3.new(x, y, z);
 					elseif (type == "Random") then
 						local randomization = flags["anti_aim_velocity_spoofer_randomization"];
