@@ -4709,9 +4709,9 @@ do
 						new_velocity = custom_math.random_vector3(randomization * 1000); 
 					end;
 					
-					if antiLockEnabled then
+					if antiLockEnabledPREM then
 						library:Notification("Anti Lock [OFF]", 2)
-						antiLockEnabled = false
+						antiLockEnabledPREM = false
 					end
 					hrp.Velocity = new_velocity;
 					run_service.RenderStepped:Wait();
