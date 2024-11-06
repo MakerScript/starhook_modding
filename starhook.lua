@@ -2921,7 +2921,7 @@ local game_support = {
         BulletBeamName = "GunBeam",
         BulletPath = workspace:FindFirstChild("Ignored") or nil
 	},
-	[138132667121404] = {
+	[119694319218585] = {
         Number = 16,
         Name = "Hood Z",
         Remote = "MainEvent",
@@ -4670,7 +4670,6 @@ do
 
 		--// anti aim
 
-		local antiLockEnabledPREM = false
 
 		do
 			--// velocity spoofer
@@ -4679,11 +4678,6 @@ do
 				local keybind = flags["anti_aim_velocity_spoofer_keybind"];
 
 				if (enabled and keybind and utility.has_character(local_player)) then
-
-					if not antiLockEnabledPREM then
-						library:Notification("Anti Lock [ON]", 2)
-						antiLockEnabledPREM = true
-					end
 
 					local type = flags["anti_aim_velocity_spoofer_type"];
 
@@ -4709,10 +4703,6 @@ do
 						new_velocity = custom_math.random_vector3(randomization * 1000); 
 					end;
 					
-					if antiLockEnabledPREM then
-						library:Notification("Anti Lock [OFF]", 2)
-						antiLockEnabledPREM = false
-					end
 					hrp.Velocity = new_velocity;
 					run_service.RenderStepped:Wait();
 					hrp.Velocity = old_velocity;
@@ -5555,7 +5545,7 @@ do
 			air_part_option_list:List({Name = "Aim Part", Flag = "rage_target_aim_air_aim_part", Options = {"Head", "HumanoidRootPart", "UpperTorso", "LowerTorso"}, Default = "HumanoidRootPart"});
 			local air_offset_toggle = rage_main_target_aim:Toggle({Name = "Air Offset", Flag = "rage_target_aim_use_air_offset"});
 			local air_offset_option_list = air_offset_toggle:OptionList({});
-			air_offset_option_list:Slider({Name = "Offset", Flag = "rage_target_aim_air_offset", Default = 4, Minimum = 0, Maximum = 10, Decimals = 0.001, Ending = "'"});
+			air_offset_option_list:Slider({Name = "Offset", Flag = "rage_target_aim_air_offset", Default = 4, Minimum = -10, Maximum = 10, Decimals = 0.001, Ending = "'"});
 			local resolver_toggle = rage_main_target_aim:Toggle({Name = "Resolver", Flag = "rage_target_aim_resolver_enabled"});
 			local resolver_option_list = resolver_toggle:OptionList({});
 			resolver_option_list:List({Name = "Method", Flag = "rage_target_aim_resolver_method", Options = {"Recalculate", "MoveDirection"}, Default = "Recalculate"});
@@ -5566,7 +5556,7 @@ do
 			local anti_ground_toggle = rage_main_target_aim:Toggle({Name = "Anti Ground Shots", Flag = "rage_target_aim_anti_ground_shots"});
 			local anti_ground_option_list = anti_ground_toggle:OptionList({});
 			--// anti_ground_option_list:Slider({Name = "To Take Off", Flag = "rage_target_aim_anti_ground_shots_to_take_off", Default = 2, Minimum = 0.1, Maximum = 20, Decimals = 0.01, Ending = "'"});
-			anti_ground_option_list:Slider({Name = "Dampening Factor", Flag = "rage_target_aim_dampening_factor", Default = 0.7, Minimum = 0, Maximum = 10, Decimals = 0.01, Ending = ""});
+			anti_ground_option_list:Slider({Name = "Dampening Factor", Flag = "rage_target_aim_dampening_factor", Default = 0.7, Minimum = -10, Maximum = 10, Decimals = 0.01, Ending = ""});
 			local fov_toggle = rage_main_target_aim:Toggle({Name = "Field Of View", Flag = "rage_target_aim_use_field_of_view"});
 			local fov_option_list = fov_toggle:OptionList({});
 			fov_option_list:Toggle({Name = "Visualize", Flag = "rage_target_aim_visualize_field_of_view"});
