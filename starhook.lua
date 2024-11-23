@@ -4859,8 +4859,34 @@ do
 	end;
 
 
-	--// gun tp
-	
+--// bullet tp
+
+	if (table.find(dahood_ids, game.PlaceId)) then
+		utility.new_connection(workspace.Ignored.ChildAdded, function(object)
+			if (flags["rage_target_aim_enabled"] and flags["rage_target_aim_bullet_tp_enabled"] and 
+				(locals.target_aim.is_targetting and locals.target_aim.target) and 
+				utility.has_character(locals.target_aim.target) and 
+				object.Name == "Bullet") then
+				
+				local target = locals.target_aim.target;
+				local part = object:WaitForChild("Main");
+
+				part.CFrame = target.Character.HumanoidRootPart.CFrame;
+
+				local connection = utility.new_connection(run_service.Heartbeat, function()
+					if ((locals.target_aim.is_targetting and target) and utility.has_character(target)) then
+						part.CFrame = target.Character.HumanoidRootPart.CFrame;
+						part.Velocity = Vector3.new(0, 0.001, 0);
+					end;
+				end);
+
+				utility.new_connection(object.Destroying, function()
+					connection:Disconnect();
+				end);
+			end;
+		end);
+	end;
+
 
     --// gun connections
     do
