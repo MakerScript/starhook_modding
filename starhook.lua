@@ -2957,7 +2957,7 @@ local game_support = {
         BulletBeamName = "GunBeam",
         BulletPath = workspace:FindFirstChild("Ignored") or nil
 	},
-	[138593053726293] = {
+	[104596910487466] = {
         Number = 20,
         Name = "New Hood",
         Remote = "MainEvent",
