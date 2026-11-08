@@ -241,7 +241,7 @@ local function Overwrite<T>(to_overwrite: T, overwrite_with: {}): T
 		if v == to_overwrite[i] then
 			continue
 		end
-		to_overwrite[i] = type(v) == "table" and Overwrite(to_overwrite[i] or {}, v) or v
+		to_overwrite[i] = type(v) == "table" and Overwrite(to_overwrite[i], v) or v
 	end
 
 	return to_overwrite
