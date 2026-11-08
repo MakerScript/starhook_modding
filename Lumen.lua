@@ -237,11 +237,19 @@ local function Add(class: string, propertyTable: { [string]: any }?): Instance
 end
 
 local function Overwrite<T>(to_overwrite: T, overwrite_with: {}): T
+	if type(to_overwrite) ~= "table" then
+		return overwrite_with :: any
+	end
+	
 	for i, v in pairs(overwrite_with) do
 		if v == to_overwrite[i] then
 			continue
 		end
-		to_overwrite[i] = type(v) == "table" and Overwrite(to_overwrite[i], v) or v
+		if type(v) == "table" and type(to_overwrite[i] == "table" then
+			to_overwrite[i] = Overwrite(to_overwrite[i], v)
+		else
+			to_overwrite[i] = v	
+		end
 	end
 
 	return to_overwrite
